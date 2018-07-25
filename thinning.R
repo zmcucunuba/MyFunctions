@@ -3,12 +3,13 @@
 
 #  Thinning _function
 
-thinning <- function(rawdat, nfinal)
+thinning <- function(rawdat,  # dataset with x number of rows
+                     nfinal   # final number of rows wanted
+                    )
   
 {
   #
   nrows <- NROW(rawdat)
-  #  Warning here!
   byc    <- nrows / nfinal
   cuts   <- seq(1, nrows, by = byc)
   lc     <- length(cuts)
