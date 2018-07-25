@@ -3,8 +3,8 @@
 
 #  Thinning _function
 
-thinning <- function(rawdat,  # dataset with x number of rows
-                     nfinal   # final number of rows wanted
+thinning <- function(rawdat,  # dataset with x number of rows (or vector with x number of components)
+                     nfinal   # final number of rows (or components) wanted
                     )
   
 {
@@ -16,11 +16,11 @@ thinning <- function(rawdat,  # dataset with x number of rows
   output <- data.frame()
   for (i in 1:lc)
   {
-    if (is.null(ncol(rawdat))) {
+    if (is.null(ncol(rawdat))) { # When it is a vector 
       abc    <- rawdat[cuts[i]]
       output <- rbind(output, abc)
       
-    } else{
+    } else{  # When it is a dataset
       abc    <- rawdat[cuts[i], ]
       output <- rbind(output, abc)
     }
