@@ -1,3 +1,3 @@
-#MyFunctions
+# MyFunctions
 
-Some useful functions for many purpouses
+Some useful functions for many purposes
