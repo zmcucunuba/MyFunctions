@@ -1,0 +1,113 @@
+---
+title: "test"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r, ops}
+
+rm(list=ls())
+library(tidyverse)
+
+## ---------------------------------------------------------
+## -------------------- FUNCIONES EN R ----------------------
+## ---------------------------------------------------------
+
+
+
+
+##### ------------ Las partes de una función
+# --- Las funciones tienen cuantro partes
+# 1) nombre de la función
+# 2) argumenos (inpunt)
+# 3) cuerpo (operaciones)
+# 4) resultado (output)
+
+
+
+fun_imc <-                #1) nombre de la función
+  function(peso, talla) { #2) argumenos (inpunt)
+    imc <- peso/(talla ^2)  #3) cuerpo (operaciones)
+    return(imc)             #4) resultado
+  }
+
+fun_imc(peso = 60, talla = 1.80)
+
+
+
+dat <- data.frame(peso =  runif(n = 1000, min = 45, max = 90),
+                  talla = rnorm(n = 1000, mean = 1.6, sd = 0.1)
+)
+
+
+dat$imc_resultado <- fun_imc(peso = dat$peso, talla = dat$talla)
+
+dat <- dat %>% mutate(imc_resultado2 = fun_imc(peso, talla))
+
+fun_multx2 <- function(y, x, z, i, j, k) y * x/10 + 34 / z
+
+fun_multx2(y = 235, x=4, z = 7)
+
+fun_imc_v2 <- function(peso, talla) peso/(talla ^2) # versión corta de mi función
+
+
+
+dd <- readRDS("dd_example.RDS")
+
+
+fun_grafico_edad <-       # 1) nombre
+  function(dd, titulo) {  # 2) Argumentos
+ 
+    #### Cuerpo (operación)
+   p1 <- ggplot(data = dd) +
+    geom_bar(aes(x = age_class, y = cases), stat = "identity",
+             fill = "pink", colour = "black") +
+    xlab("Edad") + ylab("Número de casos") +
+    theme_dark() +
+    ggtitle(titulo)
+  
+  return(p1) #resultado
+  
+  
+}
+
+
+
+fun_grafico_edad(dd, "Colombia")
+fun_grafico_edad(dd, "Peru")
+
+
+
+
+
+
+
+
+# library(rio)
+# dd <- import("https://covid.ourworldindata.org/data/owid-covid-data.csv", format ="csv")
+# 
+# fun_covid_paises <- function(ddd){
+#   mis_paises <- c("Chile", "Colombia", "Peru", "Mexico", "Panama" )
+#   ddd <- ddd %>% filter(location %in% mis_paises)
+#   p <- ggplot(ddd) +
+#     geom_line(aes(x = date, y = new_deaths_smoothed))  +
+#     facet_wrap(~ location, scales = "free_y")
+#   return(p)
+#   
+# }
+# 
+# fun_covid_paises(dd)
+# toupper(nombres)
+
+
+
+
+
+
+```
+
